@@ -3,6 +3,7 @@ const game = () => {
     let cScore = 0;
     let pScore = 0;
 
+    // Fades out intro screen and fades in match screen
     const startGame = () => {
         const playBtn = document.querySelector('.intro button');
         const introScreen = document.querySelector('.intro');
@@ -78,11 +79,13 @@ const game = () => {
                 winner.textContent = "Computer wins"
                 cScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             } else  {
                 winner.textContent = "Player wins"
                 pScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             }
         }
@@ -92,11 +95,13 @@ const game = () => {
                 winner.textContent = "Computer wins"
                 cScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             } else  {
                 winner.textContent = "Player wins"
                 pScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             }
         }
@@ -106,38 +111,49 @@ const game = () => {
                 winner.textContent = "Computer wins"
                 cScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             } else  {
                 winner.textContent = "Player wins"
                 pScore++
                 updateScore();
+                checkWinner();//NOT CURRENTLY WORKING
                 return;
             }
         }
-        //checkWinner function - NOT CURRENTLY WORKING
-        const checkWinner = () => {
-        const winner = document.querySelector('.winner');
-        const winTotal = document.createElement('p')
-        
-        if (pScore >= 5 || cScore >= 5) {
-         if (pScore > cScore) {
-             winTotal.textContent = `Player Wins! 5 - ${cScore}`;
-         } else {
-             winTotal.textContent = `Computer Wins! 5 - ${pScore}`;
-         }
-        } else {
-            return;
-        }
-        winner.appendChild(winTotal);
-      }
     }
 
+    //checkWinner function - WORKING
+    function checkWinner() {
+        const winner = document.querySelector('.winner');
+        const playerScore = document.querySelector('.player-score p');
+        const computerScore = document.querySelector('.computer-score p');
+        
+        if (pScore == 5 || cScore == 5) {
+            if (pScore > cScore) {
+                winner.textContent = `Player Wins! 5 - ${cScore}`;
+                pScore = 0;
+                cScore = 0;
+                playerScore.textContent = '0';
+                computerScore.textContent = '0';
+            } else {
+                winner.textContent = `Computer Wins! 5 - ${pScore}`;
+                pScore = 0;
+                cScore = 0;
+                playerScore.textContent = '0';
+                computerScore.textContent = '0';
+            }
+        }
+        return;
+    }
+    
 
+        
     //Inner function calls
     startGame();
     playRound();
-    checkWinner();//NOT CURRENTLY WORKING
 }
+
 
 //Start Game
 game();
@@ -145,5 +161,6 @@ game();
 //Changes to be made
 // - Change animation time to be less --- DONE
 // - Change img's to be rock when shakePlayer and shakeComputer are active --- DONE
+// - Make round limit of 5, winner and scores displayed on screen --- DONE
 
 
